@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>Centro Deportivo - Alta de usuarios</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="altausuario.css" />
+</head>
+
+<header>
+    <a href="index2.html">
+        <img src="imagenes/trophy.svg" />
+    </a>
+    <h1 class="title">Centro deportivo de PW</h1>
+    <div class="sign-out">
+        <p>Bienvenid@ Usuario123</p>
+        <a href="index.html">
+            <p>Desconectarse</p>
+        </a>
+    </div>
+</header>
+
+<body>
+    <nav>
+        <a href="index2.html">Página principal</a>
+        <a href="actividades.html">Actividades</a>
+        <a href="horario.html">Horario</a>
+        <a href="tecnicos.html">Técnicos</a>
+        <a href="instalaciones.html">Instalaciones y servicios</a>
+        <a href="localizacion.html">Localización</a>
+        <a href="precios.html">Precios y promociones</a>
+        <a href="foro.html">Foro</a>
+    </nav>
+
+    <form method="POST" action="procesar_formulario_alta.php">
+        <legend>¡Únete a nuestro centro!</legend>
+        <label for="nombre">Nombre *</label>
+        <input type="text" id="nombre" name="nombre" required/>
+        <label for="primerApellido">Primer apellido *</label>
+        <input type="text" id="primerApellido" name="primerApellido" required/>
+        <label for="segundoApellido">Segundo apellido</label>
+        <input type="text" id="segundoApellido" name="segundoApellido" />
+        <label for="nickname">Nombre de usuario *</label>
+        <input type="text" maxlength="15" id="nickname" name="nickname" required/>
+        <label for="passphrase">Contraseña *</label>
+        <input type="password" id="passphrase" name="passphrase" required/>
+        <label for="correoElectronico">Correo electrónico *</label>
+        <input type="text" id="correoElectronico" name="correoElectronico" required/>
+        <label for="fechaNacimiento">Fecha de nacimiento *</label>
+        <input class="input-fecha" type="date" id="fechaNacimiento" name="fechaNacimiento" required/>
+        <label for="actividadPreferida">Actividad deportiva preferida</label>
+        <select id="actividadPreferida" name="actividadPreferida" >
+            <option value="futbol">Fútbol</option>
+            <option value="baloncesto">Baloncesto</option>
+            <option value="rugby">Rugby</option>
+            <option value="zumba">Zumba</option>
+            <option value="crossfit">CrossFit</option>
+            <option value="yoga">Yoga</option>
+            <option value="spinning">Spinning</option>
+            <option value="kickboxing">Kickboxing</option>
+            <option value="otra">Otra</option>
+        </select>
+        <label>¿A qué actividades estás interesad@ en apuntarte?</label>
+        <section>
+            <input type="checkbox" id="checkFutbol" value="apuntarseFutbol" name="apuntarseFutbol" />
+            <label class="categoria" for="checkFutbol">Fútbol</label>
+            <input type="checkbox" id="checkBaloncesto" value="apuntarseBaloncesto" name="apuntarseBaloncesto"/>
+            <label class="categoria" for="checkBaloncesto">Baloncesto</label>
+            <input type="checkbox" id="checkRugby" value="apuntarseRugby" name="apuntarseRugby"/>
+            <label class="categoria" for="checkRugby">Rugby</label>
+            <input type="checkbox" id="checkZumba" value="apuntarseZumba" name="apuntarseZumba" />
+            <label class="categoria" for="checkZumba">Zumba</label>
+            <input type="checkbox" id="checkCrossFit" value="apuntarseCrossFit" name="apuntarseCrossFit"/>
+            <label class="categoria" for="checkCrossFit">CrossFit</label>
+            <input type="checkbox" id="checkYoga" value="apuntarseYoga" name="apuntarseYoga"/>
+            <label class="categoria" for="checkYoga">Yoga</label>
+            <input type="checkbox" id="checkSpinning" value="apuntarseSpinning" name="apuntarseSpinning"/>
+            <label class="categoria" for="checkSpinning">Spinning</label>
+            <input type="checkbox" id="checkKickboxing" value="apuntarseKickboxing" name="apuntarseKickboxing"/>
+            <label class="categoria" for="checkKickboxing">Kickboxing</label>
+        </section>
+        <label>¿Alguna vez has sido miembro de un centro deportivo? *</label>
+        <section>
+            <input type="radio" id="radioSi" name="miembro" value="miembroSi" required/>
+            <label class="categoria" for="radioSi" >Sí</label>
+            <input type="radio" id="radioNo" name="miembro" value="miembroNo" required/>
+            <label class="categoria" for="radioNo" >No</label>
+        </section>
+        <label for="conocimiento">¿Cómo nos conociste? *</label>
+        <textarea id="conocimiento" name="conocimiento" rows="5" placeholder="A través de un amigo, por internet, un anuncio..." required></textarea>
+        <br/>
+        <input type="submit" class="form-button" id="enviarFormulario" value="Enviar formulario"/>
+    </form>
+</body>
+
+<footer>
+    <a href="contacto.html">Contacto</a>
+    <a> - </a>
+    <a href="como_se_hizo.pdf">Cómo se hizo</a>
+</footer>
