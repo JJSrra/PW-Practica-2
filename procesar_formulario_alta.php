@@ -22,6 +22,9 @@ try {
 
     foreach($_POST as $key => $value) {
         if (!empty($value)){
+            if ($key == "passphrase")
+                $value = hash('sha512', $value);
+
             $sentencia->bindValue(":".$key, $value);
         }
         else{
