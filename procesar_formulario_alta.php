@@ -1,47 +1,9 @@
 <?php
 
-define("DB_DSN", "mysql:host=localhost;dbname=db76589592_pw1718" );
-define("DB_USUARIO", "x76589592");
-define("DB_PASSWORD", "76589592");
+require_once("usuarios.class.inc.php");
 
-try {
-    $conexion = new PDO(DB_DSN, DB_USUARIO, DB_PASSWORD);
-    $conexion->query('SET NAMES utf8');
-} catch (PDOException $e){
-    die("Conexión fallida: ".$e->getMessage());
-}
-
-$sql = "INSERT INTO Usuarios VALUES (:nombre, :primerApellido, :segundoApellido, :nickname,
-    :passphrase, :correoElectronico, :fechaNacimiento, :actividadPreferida, :apuntarseFutbol,
-    :apuntarseBaloncesto, :apuntarseRugby, :apuntarseZumba, :apuntarseCrossFit, :apuntarseYoga,
-    :apuntarseSpinning, :apuntarseKickboxing, :miembroAnterior, :conocimiento)";
-
-$sentencia = $conexion->prepare($sql);
-
-try {
-
-    foreach($_POST as $key => $value) {
-        if (!empty($value)){
-            if ($key == "passphrase")
-                $value = hash('sha512', $value);
-
-            $sentencia->bindValue(":".$key, $value);
-        }
-        else{
-            if ($key == "segundoApellido")
-                $sentencia->bindValue(":".$key, null);
-            else
-                $sentencia->bindValue(":".$key, 0);
-        }
-    }
-
-
-    $sentencia->execute();
-} catch (PDOException $e){
-    die("Petición fallida: ".$e->getMessage());
-}
-
-$nombre = $_POST['nombre'];
+$usuario = new Usuario();
+$usuario->crearUsuario($_POST);
 
 header("Location: registrado.php");
 exit;

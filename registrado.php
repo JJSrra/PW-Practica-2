@@ -24,7 +24,7 @@
     <section class="registro">
         <h2 class="mensaje-registro">¡Gracias por registrarte!</h2>
         <h4 class="mensaje-registro">Puedes volver a la página principal siguiendo
-            <a href="index2.html">este enlace</a>.</h4>
+            <a href="index.php">este enlace</a>.</h4>
     </section>
 </body>
 
