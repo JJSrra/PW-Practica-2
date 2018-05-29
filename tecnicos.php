@@ -37,7 +37,7 @@
 
 <body>
     <nav class="sections">
-        <a class="enlace" href="index2.php">Página principal</a>
+        <a class="enlace" href="index.php">Página principal</a>
         <a class="enlace" href="actividades.php">Actividades</a>
         <a class="enlace" href="horario.php">Horario</a>
         <a class="enlace" href="instalaciones.php">Instalaciones y servicios</a>
