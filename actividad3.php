@@ -2,8 +2,8 @@
     session_start();
 ?>
 
-<!doctype php>
-<php lang="es">
+<!doctype html>
+<html lang="es">
 
 <head>
     <title>Centro Deportivo - Actividades - Kickboxing</title>
