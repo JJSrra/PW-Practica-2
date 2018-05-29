@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!doctype html>
 <html lang="es">
 
@@ -7,32 +11,43 @@
     <link rel="stylesheet" type="text/css" href="altausuario.css" />
 </head>
 
-<header>
-    <a href="index2.html">
-        <img src="imagenes/trophy.svg" />
+<header class="cabecera">
+    <a class="enlace" href="index.php">
+        <img class="logo-centro" src="imagenes/trophy.svg" />
     </a>
     <h1 class="title">Centro deportivo de PW</h1>
-    <div class="sign-out">
-        <p>Bienvenid@ Usuario123</p>
-        <a href="index.html">
-            <p>Desconectarse</p>
-        </a>
-    </div>
+    <?php
+        if (!empty($_SESSION['nickname'])){
+            echo '<div class="sign-out">
+        <p>Bienvenid@ ' . $_SESSION['nickname'] . '</p>
+        <a class="enlace" href="procesar_unlogin.php"><p>Desconectarse</p></a>
+        </div>';
+        }
+        else {
+            echo '<form class="formulario-login" method="POST" action="procesar_login.php">
+        <label class="label-login" for="nombreUsuario">Usuario</label><br>
+        <input class="input-login" type="text" id="nombreUsuario" name="nombreUsuario"/><br>
+        <label class="label-login" for="passwordUsuario">Contraseña</label><br>
+        <input class="input-login" type="password" id="passwordUsuario" name="passwordUsuario"/><br><br>
+        <input class="input-login" type="submit" id="submitUsuario" name="submitUsuario"/>
+        </form>';
+        }
+    ?>
 </header>
 
 <body>
     <nav>
-        <a href="index2.html">Página principal</a>
-        <a href="actividades.html">Actividades</a>
-        <a href="horario.html">Horario</a>
-        <a href="tecnicos.html">Técnicos</a>
-        <a href="instalaciones.html">Instalaciones y servicios</a>
-        <a href="localizacion.html">Localización</a>
-        <a href="precios.html">Precios y promociones</a>
-        <a href="foro.html">Foro</a>
+        <a class="enlace" href="index.php">Página principal</a>
+        <a class="enlace" href="actividades.php">Actividades</a>
+        <a class="enlace" href="horario.php">Horario</a>
+        <a class="enlace" href="tecnicos.php">Técnicos</a>
+        <a class="enlace" href="instalaciones.php">Instalaciones y servicios</a>
+        <a class="enlace" href="localizacion.php">Localización</a>
+        <a class="enlace" href="precios.php">Precios y promociones</a>
+        <a class="enlace" href="foro.php">Foro</a>
     </nav>
 
-    <form method="POST" action="procesar_formulario_alta.php">
+    <form class="formulario-alta" method="POST" action="procesar_formulario_alta.php">
         <legend>¡Únete a nuestro centro!</legend>
         <label for="nombre">Nombre *</label>
         <input type="text" id="nombre" name="nombre" required/>
@@ -102,7 +117,7 @@
 </body>
 
 <footer>
-    <a href="contacto.html">Contacto</a>
+    <a class="enlace" href="contacto.php">Contacto</a>
     <a> - </a>
-    <a href="como_se_hizo.pdf">Cómo se hizo</a>
+    <a class="enlace" href="como_se_hizo.pdf">Cómo se hizo</a>
 </footer>
