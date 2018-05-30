@@ -43,7 +43,14 @@
         <a class="enlace" href="tecnicos.php">Técnicos</a>
         <a class="enlace" href="instalaciones.php">Instalaciones y servicios</a>
         <a class="enlace" href="localizacion.php">Localización</a>
-        <a class="enlace" href="altausuario.php">Alta de usuarios</a>
+        <?php
+            if (!empty($_SESSION['nickname'])){
+                echo '<a class="enlace" href="perfil.php">Perfil</a>';
+            }
+            else {
+                echo '<a class="enlace" href="altausuario.php">Alta de usuarios</a>';
+            }
+        ?>
         <a class="enlace" href="foro.php">Foro</a>
     </nav>
     <table>
