@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once("dataObject.class.inc.php");
 
 class Usuario extends DataObject {
@@ -52,6 +54,9 @@ class Usuario extends DataObject {
                         $sentencia->bindValue(":".$key, 0);
                 }
             }
+
+            $_SESSION['nickname'] = $_POST['nickname'];
+            $_SESSION['nombre'] = $_POST['nombre'];
 
             $sentencia->execute();
         } catch (PDOException $e){
