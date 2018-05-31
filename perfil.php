@@ -19,6 +19,41 @@
     <title>Centro Deportivo - Perfil</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="altausuario.css" />
+    <script>
+    function validarFormulario(){
+        var obligatorios = ["nombre", "primerApellido",
+                            "correoElectronico", "fechaNacimiento"];
+
+        for (campo of obligatorios){
+            if (document.forms["modificar-perfil"][campo].value == ""){
+                alert("El campo " + campo + " no puede dejarse en blanco");
+                return false;
+            }
+        }
+
+        if (document.forms["modificar-perfil"]["passphraseActual"].value == ""){
+                alert("Debes introducir tu contraseña actual para validar los cambios");
+                return false;
+        }
+        
+        var passphrase = document.forms["modificar-perfil"]["passphrase"].value;
+        if (passphrase.length != 0 && passphrase.length < 4) {
+            alert("Tu nueva contraseña tiene que tener al menos 4 caracteres");
+            return false;
+        }
+
+        var correoElectronico = document.forms["modificar-perfil"]["correoElectronico"].value;
+        if (correoElectronico.indexOf(' ') > -1){
+            alert("Un correo electrónico no puede contener espacios en blanco");
+            return false;
+        }
+        else if (correoElectronico.indexOf('@') < 1){
+            alert("Un correo electrónico debe tener este formato: <nombre>@<dominio>.<extension>");
+            return false;
+        }
+
+    }
+    </script>
 </head>
 
 <header class="cabecera">
@@ -57,20 +92,20 @@
         <a class="enlace" href="foro.php">Foro</a>
     </nav>
 
-    <form class="formulario-alta" method="POST" action="modificar_perfil.php">
+    <form class="formulario-alta" name="modificar-perfil" onsubmit="return validarFormulario()" method="POST" action="modificar_perfil.php">
         <legend>Modifica tus datos de perfil</legend>
         <label for="nombre">Nombre *</label>
-        <input type="text" id="nombre" name="nombre" value="<?php echo $nombre ?>" required/>
+        <input type="text" id="nombre" name="nombre" value="<?php echo $nombre ?>"/>
         <label for="primerApellido">Primer apellido *</label>
-        <input type="text" id="primerApellido" name="primerApellido" value="<?php echo $primerApellido ?>" required/>
+        <input type="text" id="primerApellido" name="primerApellido" value="<?php echo $primerApellido ?>"/>
         <label for="segundoApellido">Segundo apellido</label>
         <input type="text" id="segundoApellido" name="segundoApellido" value="<?php echo $segundoApellido ?>" />
         <label for="passphrase">Nueva contraseña (sólo si quieres cambiar la actual)</label>
         <input type="password" id="passphrase" name="passphrase"/>
         <label for="correoElectronico">Correo electrónico *</label>
-        <input type="text" id="correoElectronico" name="correoElectronico" value="<?php echo $correoElectronico ?>" required/>
+        <input type="text" id="correoElectronico" name="correoElectronico" value="<?php echo $correoElectronico ?>"/>
         <label for="fechaNacimiento">Fecha de nacimiento *</label>
-        <input class="input-fecha" type="date" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $fechaNacimiento ?>" required/>
+        <input class="input-fecha" type="date" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $fechaNacimiento ?>"/>
         <label for="actividadPreferida">Actividad deportiva preferida</label>
         <select id="actividadPreferida" name="actividadPreferida" value="<?php echo $actividadPreferida ?>"=>
             <option <?php if($actividadPreferida == "futbol") echo "selected='selected'" ?> value="futbol">Fútbol</option>
@@ -85,7 +120,7 @@
         </select>
         <br/>
         <label for="passphrase">Introduce tu actual contraseña para confirmar los cambios</label>
-        <input type="password" id="passphraseActual" name="passphraseActual" required/>
+        <input type="password" id="passphraseActual" name="passphraseActual"/>
         <input type="submit" class="form-button" id="modificarPerfil" value="Modificar perfil"/>
     </form>
 </body>
