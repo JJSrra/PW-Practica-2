@@ -74,7 +74,9 @@ class Usuario extends DataObject {
             $_SESSION['nombre'] = $_POST['nombre'];
 
             $sentencia->execute();
+            parent::desconectar($conexion);
         } catch (PDOException $e){
+            parent::desconectar($conexion);
             die("Petición fallida: ".$e->getMessage());
         }
     }
@@ -95,16 +97,63 @@ class Usuario extends DataObject {
             $filas = $sentencia->rowCount();
             
             if ($filas == 1){
+                parent::desconectar($conexion);
                 return true;
             }
             else {
+                parent::desconectar($conexion);
                 return false;
             }
 
         } catch (PDOException $e){
+            parent::desconectar($conexion);
             die("Petición fallida: ".$e->getMessage());
         }
         
+    }
+
+    public static function actualizarDatos($usuario, $datosUsuario) {
+        $conexion = parent::conectar();
+
+        $sql = "UPDATE Usuarios SET nombre = :nombre,
+                                    primerApellido = :primerApellido,
+                                    segundoApellido = :segundoApellido,
+                                    passphrase = :passphrase,
+                                    correoElectronico = :correoElectronico,
+                                    fechaNacimiento = :fechaNacimiento,
+                                    actividadPreferida = :actividadPreferida
+                WHERE nickname = :nickname";
+
+        try {
+            $sentencia = $conexion->prepare($sql);
+
+            if (empty($datosUsuario['passphrase'])){
+                $datosUsuario['passphrase'] = $datosUsuario['passphraseActual'];
+            }
+
+            unset($datosUsuario['passphraseActual']);
+
+            $sentencia->bindValue(":nickname", $usuario);
+
+            foreach($datosUsuario as $key => $value) {
+                if (!empty($value)){
+                    if ($key == "passphrase")
+                        $value = hash('sha512', $value);
+
+                    $sentencia->bindValue(":".$key, $value);
+                }
+                else{
+                    $sentencia->bindValue(":".$key, null);
+                }
+                
+            }
+            $sentencia->execute();
+            parent::desconectar($conexion);
+
+        } catch (PDOException $e) {
+            parent::desconectar($conexion);
+            die("Petición fallida: ".$e->getMessage());
+        }
     }
 }
 
