@@ -106,28 +106,6 @@ class Usuario extends DataObject {
         }
         
     }
-
-    public static function obtenerCampo($usuario, $campo) {
-        $conexion = parent::conectar();
-
-        $sql = "SELECT :campo FROM Usuarios WHERE nickname = :nickname";
-
-        try {
-            $sentencia = $conexion->prepare($sql);
-
-            $sentencia->bindValue(":campo", $campo);
-            $sentencia->bindValue(":nickname", $usuario);
-
-            $sentencia->execute();
-
-            $resultado = $sentencia->fetch()[0];
-
-            return $resultado;
-
-        } catch (PDOException $e) {
-            die("Petición fallida: ".$e->getMessage());
-        }
-    }
 }
 
 ?>
