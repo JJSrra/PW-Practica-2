@@ -69,10 +69,7 @@ class Usuario extends DataObject {
                         $sentencia->bindValue(":".$key, 0);
                 }
             }
-
-            $_SESSION['nickname'] = $_POST['nickname'];
-            $_SESSION['nombre'] = $_POST['nombre'];
-
+            
             $sentencia->execute();
             parent::desconectar($conexion);
         } catch (PDOException $e){
