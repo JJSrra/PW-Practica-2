@@ -46,7 +46,7 @@ class Usuario extends DataObject {
     public static function crearUsuario($datosUsuario) {
         $conexion = parent::conectar();
 
-        $sql = "INSERT INTO Usuarios VALUES (:nombre, :primerApellido, :segundoApellido, :nickname,
+        $sql = "INSERT INTO " . TABLA_USUARIOS . " VALUES (:nombre, :primerApellido, :segundoApellido, :nickname,
             :passphrase, :correoElectronico, :fechaNacimiento, :actividadPreferida, :apuntarseFutbol,
             :apuntarseBaloncesto, :apuntarseRugby, :apuntarseZumba, :apuntarseCrossFit, :apuntarseYoga,
             :apuntarseSpinning, :apuntarseKickboxing, :miembroAnterior, :conocimiento)";
@@ -84,7 +84,7 @@ class Usuario extends DataObject {
     public static function validarLogin($usuario, $passphrase) {
         $conexion = parent::conectar();
 
-        $sql = "SELECT * FROM Usuarios WHERE nickname = :nickname AND passphrase = :passphrase";
+        $sql = "SELECT * FROM " . TABLA_USUARIOS . " WHERE nickname = :nickname AND passphrase = :passphrase";
 
         try {
             $sentencia = $conexion->prepare($sql);
@@ -115,7 +115,7 @@ class Usuario extends DataObject {
     public static function actualizarDatos($usuario, $datosUsuario) {
         $conexion = parent::conectar();
 
-        $sql = "UPDATE Usuarios SET nombre = :nombre,
+        $sql = "UPDATE " . TABLA_USUARIOS . " SET nombre = :nombre,
                                     primerApellido = :primerApellido,
                                     segundoApellido = :segundoApellido,
                                     passphrase = :passphrase,
