@@ -9,6 +9,42 @@
     <title>Centro Deportivo - Alta de usuarios</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="altausuario.css" />
+    <script>
+    function validarFormulario(){
+        var obligatorios = ["nombre", "primerApellido", "nickname", "passphrase",
+                            "correoElectronico", "fechaNacimiento", "miembroAnterior", "conocimiento"];
+
+        for (campo of obligatorios){
+            if (document.forms["formulario-alta"][campo].value == ""){
+                alert("El campo " + campo + " debe ser rellenado");
+                return false;
+            }
+        }
+
+        var nombreUsuario = document.forms["formulario-alta"]["nickname"].value;
+        if (nombreUsuario.length < 4 || nombreUsuario.length > 15){
+            alert("Tu nombre de usuario no puede contener menos de 4 caracteres ni más de 15");
+            return false;
+        }
+        
+        var passphrase = document.forms["formulario-alta"]["passphrase"].value;
+        if (passphrase.length < 4) {
+            alert("Tu contraseña tiene que tener al menos 4 caracteres");
+            return false;
+        }
+
+        var correoElectronico = document.forms["formulario-alta"]["correoElectronico"].value;
+        if (correoElectronico.indexOf(' ') > -1){
+            alert("Un correo electrónico no puede contener espacios en blanco");
+            return false;
+        }
+        else if (correoElectronico.indexOf('@') < 1){
+            alert("Un correo electrónico debe tener este formato: <nombre>@<dominio>.<extension>");
+            return false;
+        }
+
+    }
+    </script>
 </head>
 
 <header class="cabecera">
@@ -47,22 +83,22 @@
         <a class="enlace" href="foro.php">Foro</a>
     </nav>
 
-    <form class="formulario-alta" method="POST" action="procesar_formulario_alta.php">
+    <form class="formulario-alta" name="formulario-alta" method="POST" onsubmit="return validarFormulario()" action="procesar_formulario_alta.php">
         <legend>¡Únete a nuestro centro!</legend>
         <label for="nombre">Nombre *</label>
-        <input type="text" id="nombre" name="nombre" required/>
+        <input type="text" id="nombre" name="nombre"/>
         <label for="primerApellido">Primer apellido *</label>
-        <input type="text" id="primerApellido" name="primerApellido" required/>
+        <input type="text" id="primerApellido" name="primerApellido"/>
         <label for="segundoApellido">Segundo apellido</label>
         <input type="text" id="segundoApellido" name="segundoApellido" />
         <label for="nickname">Nombre de usuario *</label>
-        <input type="text" maxlength="15" id="nickname" name="nickname" required/>
+        <input type="text" maxlength="15" id="nickname" name="nickname"/>
         <label for="passphrase">Contraseña *</label>
-        <input type="password" id="passphrase" name="passphrase" required/>
+        <input type="password" id="passphrase" name="passphrase"/>
         <label for="correoElectronico">Correo electrónico *</label>
-        <input type="text" id="correoElectronico" name="correoElectronico" required/>
+        <input type="text" id="correoElectronico" name="correoElectronico"/>
         <label for="fechaNacimiento">Fecha de nacimiento *</label>
-        <input class="input-fecha" type="date" id="fechaNacimiento" name="fechaNacimiento" required/>
+        <input class="input-fecha" type="date" id="fechaNacimiento" name="fechaNacimiento"/>
         <label for="actividadPreferida">Actividad deportiva preferida</label>
         <select id="actividadPreferida" name="actividadPreferida" >
             <option value="futbol">Fútbol</option>
@@ -104,13 +140,13 @@
         </section>
         <label>¿Alguna vez has sido miembro de un centro deportivo? *</label>
         <section>
-            <input type="radio" id="radioSi" name="miembroAnterior" value=1 required/>
+            <input type="radio" id="radioSi" name="miembroAnterior" value="1"/>
             <label class="categoria" for="radioSi" >Sí</label>
-            <input type="radio" id="radioNo" name="miembroAnterior" value=0 required/>
+            <input type="radio" id="radioNo" name="miembroAnterior" value="0"/>
             <label class="categoria" for="radioNo" >No</label>
         </section>
         <label for="conocimiento">¿Cómo nos conociste? *</label>
-        <textarea id="conocimiento" name="conocimiento" maxlength="500" rows="5" placeholder="A través de un amigo, por internet, un anuncio..." required></textarea>
+        <textarea id="conocimiento" name="conocimiento" maxlength="500" rows="5" placeholder="A través de un amigo, por internet, un anuncio..."></textarea>
         <br/>
         <input type="submit" class="form-button" id="enviarFormulario" value="Enviar formulario"/>
     </form>
