@@ -1,14 +1,29 @@
 <?php
 
-session_start();
-
 require_once("dataObject.class.inc.php");
 
 class Usuario extends DataObject {
 
-    public function __construct() {
-        parent::__construct(array());
-    }
+    protected $datos = array( 
+        "nombre" => null, 
+        "primerApellido" => null, 
+        "segundoApellido" => null,
+        "nickname" => null,
+        "passphrase" => null,
+        "correoElectronico" => null,
+        "fechaNacimiento" => null,
+        "actividadPreferida" => null,
+        "apuntarseFutbol" => 0,
+        "apuntarseBaloncesto" => 0,
+        "apuntarseRugby" => 0,
+        "apuntarseZumba" => 0,
+        "apuntarseCrossFit" => 0,
+        "apuntarseYoga" => 0,
+        "apuntarseSpinning" => 0,
+        "apuntarseKickboxing" => 0,
+        "miembroAnterior" => 0,
+        "conocimiento" => null
+    ); 
 
     public static function getUsuario($nickname) {
         $conexion = parent::conectar();
@@ -90,6 +105,28 @@ class Usuario extends DataObject {
             die("Petición fallida: ".$e->getMessage());
         }
         
+    }
+
+    public static function obtenerCampo($usuario, $campo) {
+        $conexion = parent::conectar();
+
+        $sql = "SELECT :campo FROM Usuarios WHERE nickname = :nickname";
+
+        try {
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->bindValue(":campo", $campo);
+            $sentencia->bindValue(":nickname", $usuario);
+
+            $sentencia->execute();
+
+            $resultado = $sentencia->fetch()[0];
+
+            return $resultado;
+
+        } catch (PDOException $e) {
+            die("Petición fallida: ".$e->getMessage());
+        }
     }
 }
 

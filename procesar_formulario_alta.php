@@ -1,9 +1,10 @@
 <?php
 
+session_start();
+
 require_once("usuarios.class.inc.php");
 
-$usuario = new Usuario();
-$usuario->crearUsuario($_POST);
+Usuario::crearUsuario($_POST);
 
 header("Location: registrado.php");
 exit;

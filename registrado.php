@@ -1,5 +1,7 @@
 <?php
     session_start();
+
+    require_once('usuarios.class.inc.php');
 ?>
 
 <!doctype html>
@@ -37,7 +39,12 @@
 
 <body>
     <section class="registro">
-        <h2 class="mensaje-registro">¡Gracias por registrarte, <?php echo $_SESSION['nombre']?>!</h2>
+        <h2 class="mensaje-registro">¡Gracias por registrarte, 
+        <?php
+            $usuario = Usuario::getUsuario($_SESSION["nickname"]);
+            $nombre = $usuario->getValor("nombre"); 
+            echo $nombre;
+        ?>!</h2>
         <h4 class="mensaje-registro">Puedes volver a la página principal siguiendo
             <a href="index.php">este enlace</a>.</h4>
     </section>
